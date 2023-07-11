@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,29 +24,33 @@
   <ul class="file-list" id="drive-entries"></ul>
 
   <script>
-    function loadDriveEntries(folderId) {
+    function loadDriveEntries(folderId, element) {
 var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y';
-	  
 
       fetch(url)
         .then(function(response) {
           return response.json();
         })
         .then(function(data) {
-          var entriesList = document.getElementById('drive-entries');
+          var entriesList = document.createElement('ul');
 
           data.files.forEach(function(entry) {
             var listItem = document.createElement('li');
             var link = document.createElement('a');
             
             if (entry.mimeType === 'application/vnd.google-apps.folder') {
-              link.href = 'https://drive.google.com/drive/folders/' + entry.id;
+              link.href = 'javascript:void(0);';
               link.textContent = '[Folder] ' + entry.name;
               listItem.appendChild(link);
               entriesList.appendChild(listItem);
 
-              // Realizar llamada recursiva para obtener los contenidos de la subcarpeta
-              loadDriveEntries(entry.id);
+              link.addEventListener('click', function() {
+                // Eliminar la lista actual de elementos
+                entriesList.remove();
+
+                // Realizar llamada recursiva para cargar los contenidos de la subcarpeta
+                loadDriveEntries(entry.id, listItem);
+              });
             } else {
               link.href = 'https://drive.google.com/uc?id=' + entry.id;
               link.textContent = '[File] ' + entry.name;
@@ -56,6 +58,8 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
               entriesList.appendChild(listItem);
             }
           });
+
+          element.appendChild(entriesList);
         })
         .catch(function(error) {
           console.log('Error:', error);
@@ -64,13 +68,12 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
 
     // Carga los archivos y carpetas cuando la página haya terminado de cargar
     window.addEventListener('load', function() {
-      // Reemplaza 'YOUR_FOLDER_ID' con el ID real de tu carpeta de Google Drive
-	  var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
-      var rootFolderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
-      loadDriveEntries(rootFolderId);
+      // Utiliza 'root' como el ID de la carpeta raíz
+      var rootFolderId = 'root';
+      var rootElement = document.getElementById('drive-entries');
+      loadDriveEntries(rootFolderId, rootElement);
     });
   </script>
 </body>
 </html>
-
 
