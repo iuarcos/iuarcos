@@ -23,51 +23,45 @@
   <h1>Archivos de Google Drive</h1>
   <ul class="file-list" id="drive-files"></ul>
 
-  <script src="https://apis.google.com/js/api.js"></script>
   <script>
-    function handleClientLoad() {
-      gapi.load('client:auth2', initClient);
-    }
+    function loadDriveFiles() {
+      // Reemplaza 'YOUR_FOLDER_ID' con el ID de tu carpeta de Google Drive
+      var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y;
 
-    function initClient() {
-      gapi.client.init({
-        apiKey: 'AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y',
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-      }).then(function() {
-        listFiles();
-      }).catch(function(error) {
-        console.log('Error:', error);
-      });
-    }
+      fetch(url)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          var fileList = document.getElementById('drive-files');
 
-    function listFiles() {
-      gapi.client.drive.files.list({
-        q: "'1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k' in parents",
-        fields: 'files(name,id)',
-        pageSize: 10
-      }).then(function(response) {
-        var files = response.result.files;
-        var fileList = document.getElementById('drive-files');
+          data.files.forEach(function(file) {
+            var listItem = document.createElement('li');
+            var link = document.createElement('a');
+            link.href = 'https://drive.google.com/uc?id=' + file.id;
+            link.textContent = file.name;
 
-        files.forEach(function(file) {
-          var listItem = document.createElement('li');
-          var link = document.createElement('a');
-          link.href = 'https://drive.google.com/uc?id=' + file.id;
-          link.textContent = file.name;
-
-          listItem.appendChild(link);
-          fileList.appendChild(listItem);
+            listItem.appendChild(link);
+            fileList.appendChild(listItem);
+          });
+        })
+        .catch(function(error) {
+          console.log('Error:', error);
         });
-      }).catch(function(error) {
-        console.log('Error:', error);
-      });
     }
 
-    // Carga la API de Google Drive
-    handleClientLoad();
+    // Carga los archivos cuando la página haya terminado de cargar
+    window.addEventListener('load', loadDriveFiles);
   </script>
-  <script src="https://apis.google.com/js/platform.js?onload=handleClientLoad" async defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
