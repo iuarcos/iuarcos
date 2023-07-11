@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Archivos y carpetas de Google Drive</title>
+  <style>
+    .file-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .file-list li {
+      margin-bottom: 10px;
+    }
+    
+    .file-list li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archivos y carpetas de Google Drive</h1>
+  <ul class="file-list" id="drive-entries"></ul>
+
+  <script>
+    function loadDriveEntries(folderId) {
+var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y';
+	  
+
+      fetch(url)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          var entriesList = document.getElementById('drive-entries');
+
+          data.files.forEach(function(entry) {
+            var listItem = document.createElement('li');
+            var link = document.createElement('a');
+            
+            if (entry.mimeType === 'application/vnd.google-apps.folder') {
+              link.href = 'https://drive.google.com/drive/folders/' + entry.id;
+              link.textContent = '[Folder] ' + entry.name;
+              listItem.appendChild(link);
+              entriesList.appendChild(listItem);
+
+              // Realizar llamada recursiva para obtener los contenidos de la subcarpeta
+              loadDriveEntries(entry.id);
+            } else {
+              link.href = 'https://drive.google.com/uc?id=' + entry.id;
+              link.textContent = '[File] ' + entry.name;
+              listItem.appendChild(link);
+              entriesList.appendChild(listItem);
+            }
+          });
+        })
+        .catch(function(error) {
+          console.log('Error:', error);
+        });
+    }
+
+    // Carga los archivos y carpetas cuando la página haya terminado de cargar
+    window.addEventListener('load', function() {
+      // Reemplaza 'YOUR_FOLDER_ID' con el ID real de tu carpeta de Google Drive
+	  var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      var rootFolderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      loadDriveEntries(rootFolderId);
+    });
+  </script>
+</body>
+</html>
+
+
