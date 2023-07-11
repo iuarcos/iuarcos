@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Archivos de Google Drive</title>
+  <style>
+    .file-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .file-list li {
+      margin-bottom: 10px;
+    }
+    
+    .file-list li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archivos de Google Drive</h1>
+  <ul class="file-list" id="drive-files"></ul>
+
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script>
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+
+    function initClient() {
+      gapi.client.init({
+        apiKey: 'AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y',
+        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+      }).then(function() {
+        listFiles();
+      }).catch(function(error) {
+        console.log('Error:', error);
+      });
+    }
+
+    function listFiles() {
+      gapi.client.drive.files.list({
+        q: "'1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k' in parents",
+        fields: 'files(name,id)',
+        pageSize: 10
+      }).then(function(response) {
+        var files = response.result.files;
+        var fileList = document.getElementById('drive-files');
+
+        files.forEach(function(file) {
+          var listItem = document.createElement('li');
+          var link = document.createElement('a');
+          link.href = 'https://drive.google.com/uc?id=' + file.id;
+          link.textContent = file.name;
+
+          listItem.appendChild(link);
+          fileList.appendChild(listItem);
+        });
+      }).catch(function(error) {
+        console.log('Error:', error);
+      });
+    }
+
+    // Carga la API de Google Drive
+    handleClientLoad();
+  </script>
+  <script src="https://apis.google.com/js/platform.js?onload=handleClientLoad" async defer></script>
+</body>
+</html>
