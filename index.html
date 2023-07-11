@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Archivos de Google Drive</title>
+  <title>Archivos y carpetas de Google Drive</title>
   <style>
     .file-list {
       list-style-type: none;
@@ -20,32 +20,36 @@
   </style>
 </head>
 <body>
-  <h1>Archivos de Google Drive</h1>
-  <ul class="file-list" id="drive-files"></ul>
+  <h1>Archivos y carpetas de Google Drive</h1>
+  <ul class="file-list" id="drive-entries"></ul>
 
   <script>
-    function loadDriveFiles() {
+    function loadDriveEntries() {
       // Reemplaza 'YOUR_FOLDER_ID' con el ID de tu carpeta de Google Drive
-	  var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
 var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y';
-
-	 
 
       fetch(url)
         .then(function(response) {
           return response.json();
         })
         .then(function(data) {
-          var fileList = document.getElementById('drive-files');
+          var entriesList = document.getElementById('drive-entries');
 
-          data.files.forEach(function(file) {
+          data.files.forEach(function(entry) {
             var listItem = document.createElement('li');
             var link = document.createElement('a');
-            link.href = 'https://drive.google.com/uc?id=' + file.id;
-            link.textContent = file.name;
+            
+            if (entry.mimeType === 'application/vnd.google-apps.folder') {
+              link.href = 'https://drive.google.com/drive/folders/' + entry.id;
+              link.textContent = '[Folder] ' + entry.name;
+            } else {
+              link.href = 'https://drive.google.com/uc?id=' + entry.id;
+              link.textContent = '[File] ' + entry.name;
+            }
 
             listItem.appendChild(link);
-            fileList.appendChild(listItem);
+            entriesList.appendChild(listItem);
           });
         })
         .catch(function(error) {
@@ -53,17 +57,11 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
         });
     }
 
-    // Carga los archivos cuando la página haya terminado de cargar
-    window.addEventListener('load', loadDriveFiles);
+    // Carga los archivos y carpetas cuando la página haya terminado de cargar
+    window.addEventListener('load', loadDriveEntries);
   </script>
 </body>
 </html>
-
-
-
-
-
-
 
 
 
