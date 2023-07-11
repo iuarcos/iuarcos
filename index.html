@@ -68,8 +68,8 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
 
     // Carga los archivos y carpetas cuando la página haya terminado de cargar
     window.addEventListener('load', function() {
-      // Utiliza 'root' como el ID de la carpeta raíz
-      var rootFolderId = 'root';
+      // Especifica el ID de la carpeta raíz deseada en Google Drive
+      var rootFolderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
       var rootElement = document.getElementById('drive-entries');
       loadDriveEntries(rootFolderId, rootElement);
     });
