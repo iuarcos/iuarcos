@@ -42,7 +42,7 @@
 
     function listFiles() {
       gapi.client.drive.files.list({
-        q: "1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k in parents",
+        q: "'1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k' in parents",
         fields: 'files(name,id)',
         pageSize: 10
       }).then(function(response) {
