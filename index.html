@@ -46,7 +46,9 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
 
               link.addEventListener('click', function() {
                 // Eliminar la lista actual de elementos
-                entriesList.remove();
+                while (listItem.nextElementSibling) {
+                  listItem.nextElementSibling.remove();
+                }
 
                 // Realizar llamada recursiva para cargar los contenidos de la subcarpeta
                 loadDriveEntries(entry.id, listItem);
@@ -76,4 +78,3 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
   </script>
 </body>
 </html>
-
