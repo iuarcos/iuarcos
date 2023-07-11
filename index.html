@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +26,9 @@
   <ul class="file-list" id="drive-entries"></ul>
 
   <script>
-    function loadDriveEntries() {
-      // Reemplaza 'YOUR_FOLDER_ID' con el ID de tu carpeta de Google Drive
-      var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+    function loadDriveEntries(folderId) {
 var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y';
+	  
 
       fetch(url)
         .then(function(response) {
@@ -43,13 +44,17 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
             if (entry.mimeType === 'application/vnd.google-apps.folder') {
               link.href = 'https://drive.google.com/drive/folders/' + entry.id;
               link.textContent = '[Folder] ' + entry.name;
+              listItem.appendChild(link);
+              entriesList.appendChild(listItem);
+
+              // Realizar llamada recursiva para obtener los contenidos de la subcarpeta
+              loadDriveEntries(entry.id);
             } else {
               link.href = 'https://drive.google.com/uc?id=' + entry.id;
               link.textContent = '[File] ' + entry.name;
+              listItem.appendChild(link);
+              entriesList.appendChild(listItem);
             }
-
-            listItem.appendChild(link);
-            entriesList.appendChild(listItem);
           });
         })
         .catch(function(error) {
@@ -58,10 +63,14 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
     }
 
     // Carga los archivos y carpetas cuando la página haya terminado de cargar
-    window.addEventListener('load', loadDriveEntries);
+    window.addEventListener('load', function() {
+      // Reemplaza 'YOUR_FOLDER_ID' con el ID real de tu carpeta de Google Drive
+	  var folderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      var rootFolderId = '1BMwPr-6uIWSsjMOiAk-Ekuh7XeXkWx1k';
+      loadDriveEntries(rootFolderId);
+    });
   </script>
 </body>
 </html>
-
 
 
