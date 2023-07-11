@@ -25,12 +25,11 @@
   <button id="back-button" style="display: none;">Atrás</button>
 
   <script>
-    var currentFolderId;
+    var folderStack = [];
     var backButton = document.getElementById('back-button');
     backButton.addEventListener('click', navigateBack);
 
     function loadDriveEntries(folderId, element) {
-      currentFolderId = folderId;
 var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+parents&key=AIzaSyD4-_j7-4kmfxy54XPHeWfV5tnfZ6gpy0Y';
 
       fetch(url)
@@ -51,11 +50,7 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
               entriesList.appendChild(listItem);
 
               link.addEventListener('click', function() {
-                // Eliminar la lista actual de elementos
-                while (listItem.nextElementSibling) {
-                  listItem.nextElementSibling.remove();
-                }
-
+                folderStack.push(folderId);
                 backButton.style.display = 'block';
                 loadDriveEntries(entry.id, listItem);
               });
@@ -75,9 +70,12 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
     }
 
     function navigateBack() {
-      var parentElement = document.getElementById(currentFolderId).parentElement;
-      parentElement.parentElement.remove();
-      backButton.style.display = parentElement.parentElement.id === 'drive-entries' ? 'none' : 'block';
+      if (folderStack.length > 0) {
+        var previousFolderId = folderStack.pop();
+        var parentElement = document.getElementById(previousFolderId).parentElement;
+        parentElement.parentElement.remove();
+        backButton.style.display = folderStack.length === 0 ? 'none' : 'block';
+      }
     }
 
     // Carga los archivos y carpetas cuando la página haya terminado de cargar
@@ -90,5 +88,3 @@ var url = 'https://www.googleapis.com/drive/v3/files?q="' + folderId + '"+in+par
   </script>
 </body>
 </html>
-
-
