@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>Widget de Calidad del Aire</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    #city-aqi-container-display {
-        width: 100%; /* Ajusta el ancho del contenedor al viewport */
-        height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
-        padding: 20px; /* Incrementa el relleno para dar más espacio */
-        box-sizing: border-box;
-        font-size: 20px; /* Aumenta el tamaño del texto para que se ajuste al contenedor más grande */
-        text-align: center;
-    }
-</style>
+    <style>
+        #city-aqi-container-display {
+            box-sizing: border-box;
+            font-size: 20px; /* Ajusta el tamaño del texto para que se ajuste al contenedor más grande */
+            text-align: center;
+        }
+    </style>
     <script type="text/javascript" charset="utf-8">
         (function(w, d, t, f){
             w[f] = w[f] || function(c, k, n){
@@ -31,8 +21,22 @@
                 L.async = 1;
                 L.src = '//feed.aqicn.org/feed/' + (c[n].city) + '/' + (c[n].lang || '') + '/feed.v1.js?n=' + n + k;
                 e.parentNode.insertBefore(L, e);
+
+                // Agrega estilos después de cargar el widget
+                L.onload = function() {
+                    adjustWidgetStyles();
+                };
             };
         })(window, document, 'script', '_aqiFeed');
+
+        function adjustWidgetStyles() {
+            // Ajusta el contenedor del widget después de cargar el contenido
+            $("#city-aqi-container-display").css({
+                width: '100%', /* Ajusta el ancho del contenedor al viewport */
+                height: 'auto', /* Ajusta la altura automáticamente para mantener la proporción */
+                padding: '20px' /* Incrementa el relleno para dar más espacio */
+            });
+        }
 
         _aqiFeed({
             display: "%cityname AQI is %aqi<br><small>on %date</small>",
@@ -41,6 +45,7 @@
             lang: "es",
             callback: function(aqi){
                 $("#city-aqi-container-display").html(aqi.details);
+                adjustWidgetStyles(); // Ajusta los estilos después de cargar el contenido
             }
         });
     </script>
