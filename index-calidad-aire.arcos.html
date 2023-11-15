@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        #my-container {
+        #city-aqi-container-display {
             width: 140%; /* Ajusta el ancho del contenedor */
             height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
             padding: 20px; /* Incrementa el relleno para dar más espacio */
@@ -29,16 +29,16 @@
 
         _aqiFeed({
             display: "%cityname AQI is %aqi<br><small>on %date</small>",
-            container: "my-container", // Cambia el nombre del contenedor aquí
+            container: "city-aqi-container-display", // Cambia el nombre del contenedor aquí
             city: "spain/andalucia/arcos-de-la-frontera/arcos/",
             lang: "es",
             callback: function(aqi){
-                $("#my-container").html(aqi.details);
+                $("#city-aqi-container-display").html(aqi.details);
             }
         });
     </script>
 </head>
 <body>
-    <div id="my-container"></div>
+    <div id="city-aqi-container-display"></div>
 </body>
 </html>
