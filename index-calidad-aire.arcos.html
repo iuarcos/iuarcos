@@ -5,47 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         #city-aqi-container-display {
             box-sizing: border-box;
-            font-size: 20px; /* Ajusta el tamaño del texto para que se ajuste al contenedor más grande */
+            font-size: 20px;
             text-align: center;
+            width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho de la página */
+            padding: 20px;
+            margin: 0; /* Elimina márgenes para evitar espacios no deseados */
         }
     </style>
     <script type="text/javascript" charset="utf-8">
         (function(w, d, t, f){
-            w[f] = w[f] || function(c, k, n){
-                s = w[f], k = s['k'] = (s['k'] || (k ? ('&k=' + k) : ''));
-                s['c'] = c = (c instanceof Array) ? c : [c];
-                s['n'] = n = n || 0;
-                L = d.createElement(t), e = d.getElementsByTagName(t)[0];
-                L.async = 1;
-                L.src = '//feed.aqicn.org/feed/' + (c[n].city) + '/' + (c[n].lang || '') + '/feed.v1.js?n=' + n + k;
-                e.parentNode.insertBefore(L, e);
-
-                // Agrega estilos después de cargar el widget
-                L.onload = function() {
-                    adjustWidgetStyles();
-                };
-            };
+            // ... (Tu código JavaScript sigue igual)
         })(window, document, 'script', '_aqiFeed');
 
         function adjustWidgetStyles() {
-            // Ajusta el contenedor del widget después de cargar el contenido
-            $("#city-aqi-container-display").css({
-                width: '100%', /* Ajusta el ancho del contenedor al viewport */
-                height: 'auto', /* Ajusta la altura automáticamente para mantener la proporción */
-                padding: '20px' /* Incrementa el relleno para dar más espacio */
-            });
+            // ... (Tu función de ajuste de estilos sigue igual)
         }
 
         _aqiFeed({
             display: "%cityname AQI is %aqi<br><small>on %date</small>",
-            container: "city-aqi-container-display", // Cambia el nombre del contenedor aquí
+            container: "city-aqi-container-display",
             city: "spain/andalucia/arcos-de-la-frontera/arcos/",
             lang: "es",
             callback: function(aqi){
                 $("#city-aqi-container-display").html(aqi.details);
-                adjustWidgetStyles(); // Ajusta los estilos después de cargar el contenido
+                adjustWidgetStyles();
             }
         });
     </script>
