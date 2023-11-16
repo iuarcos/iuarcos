@@ -16,9 +16,15 @@
             box-sizing: border-box;
             font-size: 20px;
             text-align: center;
-            width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho de la página */
+            width: 100%;
             padding: 20px;
-            margin: 0; /* Elimina márgenes para evitar espacios no deseados */
+            margin: 0;
+        }
+
+        /* Anula los estilos específicos del widget que puedan afectar al ancho */
+        #city-aqi-container-display > div {
+            width: 100% !important;
+            max-width: none !important;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
