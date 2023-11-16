@@ -13,6 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column; /* Para organizar el widget y la tabla en columna */
         }
 
         #city-aqi-container-display {
@@ -20,13 +21,15 @@
             font-size: 20px;
             text-align: center;
             width: 100%;
-            max-width: 100%; /* Establece el máximo ancho al 100% del ancho de la página */
+            max-width: 600px; /* Puedes ajustar el máximo ancho según tus necesidades */
             padding: 20px;
+            margin-bottom: 20px; /* Añade un margen inferior entre el widget y la tabla */
         }
 
-        #city-aqi-container-display iframe {
-            width: 100%; /* Asegura que el iframe ocupe el 100% del contenedor */
-            height: 100%; /* Ocupa el 100% de la altura del contenedor */
+        #city-aqi-container-display iframe,
+        #scale-table-container iframe {
+            width: 100%; /* Asegura que ambos elementos ocupen el ancho completo */
+            height: 400px; /* Ajusta la altura según tus necesidades */
             border: none;
         }
     </style>
@@ -43,6 +46,13 @@
             };
         })(window, document, 'script', '_aqiFeed');
 
+        function adjustWidgetStyles() {
+            // Ajusta el contenedor del widget después de cargar el contenido
+            $("#city-aqi-container-display").css({
+                height: $("#city-aqi-container-display iframe").height() + 'px' /* Ajusta la altura automáticamente para mantener la proporción */
+            });
+        }
+
         _aqiFeed({
             display: "%cityname AQI is %aqi<br><small>on %date</small>",
             container: "city-aqi-container-display",
@@ -50,11 +60,37 @@
             lang: "es",
             callback: function(aqi){
                 $("#city-aqi-container-display").html(aqi.details);
+                adjustWidgetStyles();
             }
         });
     </script>
 </head>
 <body>
     <div id="city-aqi-container-display"></div>
+
+    <!-- Agrega el iframe para la tabla de escala -->
+    <div id="scale-table-container">
+        <iframe srcdoc='
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    body {
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
+            </head>
+            <body>
+                <!-- Inserta aquí la tabla de escala de calidad del aire -->
+                <table>
+                    <!-- Contenido de la tabla -->
+                </table>
+            </body>
+            </html>
+        '></iframe>
+    </div>
 </body>
 </html>
