@@ -32,6 +32,28 @@
             height: 400px; /* Ajusta la altura según tus necesidades */
             border: none;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word; /* Ajuste de texto */
+        }
+
+        th {
+            background-color: #009966;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
     </style>
     <script type="text/javascript" charset="utf-8">
         (function(w, d, t, f){
@@ -66,6 +88,7 @@
     </script>
 </head>
 <body>
+<br><br>
     <div id="city-aqi-container-display"></div>
 
     <!-- Agrega el iframe para la tabla de escala -->
@@ -76,29 +99,6 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    body {
-                        margin: 0;
-                        padding: 0;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin-top: 20px;
-                    }
-                    th, td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                        text-align: left;
-                    }
-                    th {
-                        background-color: #009966;
-                        color: white;
-                    }
-                    tr:nth-child(even) {
-                        background-color: #f2f2f2;
-                    }
-                </style>
             </head>
             <body>
                 <table class="infoaqitable">
