@@ -17,14 +17,13 @@
             font-size: 20px;
             text-align: center;
             width: 100%;
-            padding: 20px;
             margin: 0;
+            overflow: hidden; /* Evita que el widget sobresalga del contenedor */
         }
 
-        /* Anula los estilos específicos del widget que puedan afectar al ancho */
-        #city-aqi-container-display > div {
-            width: 100% !important;
-            max-width: none !important;
+        #city-aqi-container-display iframe {
+            width: 100% !important; /* Forza el ancho completo del iframe del widget */
+            border: none; /* Elimina el borde del iframe */
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -48,9 +47,7 @@
         function adjustWidgetStyles() {
             // Ajusta el contenedor del widget después de cargar el contenido
             $("#city-aqi-container-display").css({
-                width: '100%', /* Ajusta el ancho del contenedor al viewport */
-                height: 'auto', /* Ajusta la altura automáticamente para mantener la proporción */
-                padding: '20px' /* Incrementa el relleno para dar más espacio */
+                height: $("#city-aqi-container-display iframe").height() + 'px' /* Ajusta la altura automáticamente para mantener la proporción */
             });
         }
 
@@ -70,5 +67,4 @@
     <div id="city-aqi-container-display"></div>
 </body>
 </html>
-
 
