@@ -9,9 +9,10 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            justify-content: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            flex-direction: column; /* Para organizar el widget y la tabla en columna */
         }
 
         #header {
@@ -25,19 +26,37 @@
             font-size: 20px;
             text-align: center;
             width: 100%;
+            max-width: 600px;
             padding: 20px;
-            margin-bottom: 20px; /* Añade un margen inferior entre el widget y la tabla */
+            margin-bottom: 20px;
         }
 
-        #city-aqi-container-display iframe,
-        #scale-table-container iframe {
-            width: 100%; /* Asegura que ambos elementos ocupen el ancho completo */
-            border: none;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #009966;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         #footer {
             font-size: 14px;
             color: #555;
+            margin-top: 10px;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -54,9 +73,8 @@
         })(window, document, 'script', '_aqiFeed');
 
         function adjustWidgetStyles() {
-            // Ajusta el contenedor del widget después de cargar el contenido
             $("#city-aqi-container-display").css({
-                height: $("#city-aqi-container-display iframe").height() + 'px' /* Ajusta la altura automáticamente para mantener la proporción */
+                height: $("#city-aqi-container-display iframe").height() + 'px'
             });
         }
 
@@ -76,43 +94,50 @@
     <div id="header">Índice de Calidad del Aire</div>
     <div id="city-aqi-container-display"></div>
 
-    <!-- Agrega el iframe para la tabla de escala -->
-    <div id="scale-table-container">
-        <iframe srcdoc='
-            <!DOCTYPE html>
-            <html lang="es">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
-            <body>
-                <table class="infoaqitable">
-                    <thead>
-                        <tr>
-                            <th>ICA</th>
-                            <th>Calidad del Aire</th>
-                            <th>Proteja su Salud</th>
-                        </tr>
-                    </thead>
-                    <tr style="background-color:#009966;color:white">
-                        <td nowrap="true">0 - 50</td>
-                        <td>Buena</td>
-                        <td>No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.</td>
-                    </tr>
-                    <!-- Agrega las demás filas según tus necesidades -->
-                </table>
-            </body>
-            </html>
-        '></iframe>
-    </div>
+    <!-- Tabla completa -->
+    <table class="infoaqitable">
+        <thead>
+            <tr>
+                <th>ICA</th>
+                <th>Calidad del Aire</th>
+                <th>Proteja su Salud</th>
+            </tr>
+        </thead>
+        <tr style="background-color:#009966;color:white">
+            <td nowrap="true">0 - 50</td>
+            <td>Buena</td>
+            <td>No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.</td>
+        </tr>
+        <tr style="background-color:#ffde33">
+            <td nowrap="true">51 -100</td>
+            <td>Moderada</td>
+            <td>Las personas extraordinariamente sensitivas deben considerar limitación de los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+        </tr>
+        <tr style="background-color:#ff9933;color:white">
+            <td nowrap="true">101-150</td>
+            <td>Dañina a la Salud de los Grupos Sensitivos</td>
+            <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+        </tr>
+        <tr style="background-color:#cc0033;color:white">
+            <td nowrap="true">151-200</td>
+            <td>Dañina a la Salud</td>
+            <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar los esfuerzos excesivos prolongados al aire libre; las demás personas, especialmente los niños, deben limitar los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+        </tr>
+        <tr style="background-color:#660099;color:white">
+            <td nowrap="true">201-300</td>
+            <td>Muy Dañina a la Salud</td>
+            <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar todos los esfuerzos excesivos al aire libre; las demás personas, especialmente los niños, deben limitar los esfuerzos físicos excesivos al aire libre.</td>
+        </tr>
+        <tr style="background-color:#7e0023;color:white">
+            <td nowrap="true">300+</td>
+            <td>Arriesgado</td>
+            <td></td>
+        </tr>
+    </table>
 
     <div id="footer">Fuente: <a href="https://aqicn.org" target="_blank">https://aqicn.org</a></div>
 </body>
 </html>
-
-
-
-
 
 
 
