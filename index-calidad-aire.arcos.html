@@ -81,13 +81,32 @@
                         margin: 0;
                         padding: 0;
                     }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: #009966;
+                        color: white;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #f2f2f2;
+                    }
                 </style>
             </head>
             <body>
                 <table class="infoaqitable">
                     <thead>
                         <tr>
-                            <td>ICA</td><td>Calidad del Aire</td><td>Proteja su Salud</td>
+                            <th>ICA</th>
+                            <th>Calidad del Aire</th>
+                            <th>Proteja su Salud</th>
                         </tr>
                     </thead>
                     <tr style="background-color:#009966;color:white">
@@ -95,7 +114,31 @@
                         <td>Buena</td>
                         <td>No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.</td>
                     </tr>
-                    <!-- Agrega las demás filas según tus necesidades -->
+                    <tr style="background-color:#ffde33">
+                        <td nowrap="true">51 -100</td>
+                        <td>Moderada</td>
+                        <td>Las personas extraordinariamente sensitivas deben considerar limitación de los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+                    </tr>
+                    <tr style="background-color:#ff9933;color:white">
+                        <td nowrap="true">101-150</td>
+                        <td>Dañina a la Salud de los Grupos Sensitivos</td>
+                        <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+                    </tr>
+                    <tr style="background-color:#cc0033;color:white">
+                        <td nowrap="true">151-200</td>
+                        <td>Dañina a la Salud</td>
+                        <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar los esfuerzos excesivos prolongados al aire libre; las demás personas, especialmente los niños, deben limitar los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+                    </tr>
+                    <tr style="background-color:#660099;color:white">
+                        <td nowrap="true">201-300</td>
+                        <td>Muy Dañina a la Salud</td>
+                        <td>Los niños y adultos activos, y personas con enfermedades respiratorias tales como el asma, deben evitar todos los esfuerzos excesivos al aire libre; las demás personas, especialmente los niños, deben limitar los esfuerzos físicos excesivos al aire libre.</td>
+                    </tr>
+                    <tr style="background-color:#7e0023;color:white">
+                        <td nowrap="true">300+</td>
+                        <td>Arriesgado</td>
+                        <td></td>
+                    </tr>
                 </table>
             </body>
             </html>
@@ -103,4 +146,5 @@
     </div>
 </body>
 </html>
+
 
