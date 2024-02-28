@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot con Dialogflow</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-<style>
-  df-messenger {
-   --df-messenger-bot-message: #878fac;
-   --df-messenger-button-titlebar-color: #df9b56;
-   --df-messenger-chat-background-color: #fafafa;
-   --df-messenger-font-color: white;
-   --df-messenger-send-icon: #878fac;
-   --df-messenger-user-message: #479b3d;
-  }
-</style>
+        #miIframe {
+            background-color: #tuColorPreferido;
+            width: 100vw;
+            height: 100vh;
+            border: none; /* Elimina el borde del iframe */
+        }
 
-
-    
+        df-messenger {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            max-width: 400px;
+            
+            /* Estilos personalizados para df-messenger */
+            --df-messenger-bot-message: #878fac;
+            --df-messenger-button-titlebar-color: #df9b56;
+            --df-messenger-chat-background-color: #fafafa;
+            --df-messenger-font-color: white;
+            --df-messenger-send-icon: #878fac;
+            --df-messenger-user-message: #479b3d;
+        }
+    </style>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 </head>
-    
 <body>
 
-<div style="text-align: center;">
-    <iframe width="350" height="630" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/0d0efe97-3706-42c2-bb96-07e35a5247a3"></iframe>
-</div>
+<!-- Coloca el iframe con los estilos personalizados aquí -->
+<iframe id="miIframe" src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></iframe>
+<df-messenger
+    chat-icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQbjBaiKlDGxsmpGcxkOigUvhCdmdw57hOZ-rpz1UYJQ&amp"
+    intent="WELCOME"
+    chat-title="IUARCOS_programa"
+    agent-id="0d0efe97-3706-42c2-bb96-07e35a5247a3"
+    language-code="es"
+></df-messenger>
 
 </body>
 </html>
+
