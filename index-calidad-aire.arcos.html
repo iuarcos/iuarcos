@@ -1,62 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Widget de Calidad del Aire</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<title>Calidad del Aire Arcos de la Frontera</title>
 
-        #header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            margin-top: 10px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        #city-aqi-container-display {
-            box-sizing: border-box;
-            font-size: 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
 
-        table {
-            width: 90%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+<style>
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            word-wrap: break-word;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        th {
-            background-color: #009966;
-            color: white;
-        }
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+}
 
-        #footer {
-            font-size: 14px;
-            color: #555;
-            margin-top: 10px;
-        }
-    </style>
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 10px 0 20px 0;
+}
+
+
+/* Contenedor del widget */
+.widget-container {
+
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    text-align:center;
+    overflow:hidden;
+
+}
+
+
+
+/* Tabla */
+.infoaqitable {
+
+    width:100%;
+    max-width:700px;
+    margin:20px auto;
+    border-collapse:collapse;
+    font-size:14px;
+
+}
+
+
+.infoaqitable th {
+
+    background:#009966;
+    color:white;
+    padding:10px;
+}
+
+
+.infoaqitable td {
+
+    border:1px solid #ddd;
+    padding:10px;
+    vertical-align:top;
+
+}
+
+
+
+/* Colores ICA */
+
+.buena {
+
+    background:#009966;
+    color:white;
+
+}
+
+
+.moderada {
+
+    background:#ffde33;
+
+}
+
+
+.sensible {
+
+    background:#ff9933;
+    color:white;
+
+}
+
+
+.danina {
+
+    background:#cc0033;
+    color:white;
+
+}
+
+
+.muydanina {
+
+    background:#660099;
+    color:white;
+
+}
+
+
+.peligrosa {
+
+    background:#7e0023;
+    color:white;
+
+}
+
+
+/* En móvil */
+
+@media(max-width:600px){
+
+h1 {
+    font-size:20px;
+}
+
+
+.infoaqitable {
+
+    font-size:12px;
+
+}
+
+
+.infoaqitable td,
+.infoaqitable th {
+
+    padding:6px;
+
+}
+
+}
+
+
+.footer {
+
+text-align:center;
+font-size:13px;
+color:#666;
+margin-top:20px;
+
+}
+
+
+</style>
+
 
 </head>
 
@@ -64,89 +166,176 @@
 <body>
 
 
-<div id="header">
-    Índice de Calidad del Aire
+<h1>
+Índice de Calidad del Aire
+</h1>
+
+
+
+<div class="widget-container">
+
+
+<script type='text/javascript' src='https://widgets.waqi.info/jswgt/?size=xxl&city=@8456&lang=es'></script>
+
+<noscript>
+No se puede mostrar el widget.
+(<a href="https://aqicn.org/">Más información</a>)
+</noscript>
+
+
 </div>
 
-
-<!-- Widget AQICN estación Arcos -->
-<div id="city-aqi-container-display">
-
-    <script async 
-    src="https://widgets.waqi.info/jswgt/?size=xxl&city=@8456&lang=es">
-    </script>
-
-    <noscript>
-        No se puede mostrar el widget.
-        (<a href="https://aqicn.org/">Más información</a>)
-    </noscript>
-
-</div>
 
 
 
 <table class="infoaqitable">
 
-<thead>
+
 <tr>
-    <th>ICA</th>
-    <th>Calidad del Aire</th>
-    <th>Proteja su Salud</th>
-</tr>
-</thead>
+<th>
+ICA
+</th>
 
+<th>
+Calidad del Aire
+</th>
 
-<tr style="background-color:#009966;color:white">
-<td nowrap="true">0 - 50</td>
-<td>Buena</td>
-<td>No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.</td>
-</tr>
-
-
-<tr style="background-color:#ffde33">
-<td nowrap="true">51 -100</td>
-<td>Moderada</td>
-<td>Las personas extraordinariamente sensitivas deben considerar limitación de los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+<th>
+Proteja su Salud
+</th>
 </tr>
 
 
-<tr style="background-color:#ff9933;color:white">
-<td nowrap="true">101-150</td>
-<td>Dañina a la Salud de los Grupos Sensitivos</td>
-<td>Los niños y adultos activos, y personas con enfermedades respiratorias deben evitar esfuerzos excesivos.</td>
+
+<tr class="buena">
+
+<td>
+0 - 50
+</td>
+
+<td>
+Buena
+</td>
+
+<td>
+No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.
+</td>
+
 </tr>
 
 
-<tr style="background-color:#cc0033;color:white">
-<td nowrap="true">151-200</td>
-<td>Dañina a la Salud</td>
-<td>Reducir esfuerzos prolongados al aire libre.</td>
+
+
+<tr class="moderada">
+
+<td>
+51 - 100
+</td>
+
+<td>
+Moderada
+</td>
+
+<td>
+Las personas extraordinariamente sensitivas deben considerar limitar los esfuerzos físicos excesivos y prolongados al aire libre.
+</td>
+
 </tr>
 
 
-<tr style="background-color:#660099;color:white">
-<td nowrap="true">201-300</td>
-<td>Muy Dañina a la Salud</td>
-<td>Evitar esfuerzos al aire libre.</td>
+
+
+<tr class="sensible">
+
+<td>
+101 - 150
+</td>
+
+<td>
+Dañina a la salud de grupos sensibles
+</td>
+
+<td>
+Los niños, adultos activos y personas con enfermedades respiratorias deben evitar esfuerzos físicos excesivos y prolongados al aire libre.
+</td>
+
 </tr>
 
 
-<tr style="background-color:#7e0023;color:white">
-<td nowrap="true">300+</td>
-<td>Arriesgado</td>
-<td></td>
+
+
+
+<tr class="danina">
+
+<td>
+151 - 200
+</td>
+
+<td>
+Dañina a la salud
+</td>
+
+<td>
+Los grupos sensibles deben reducir la exposición prolongada al aire libre.
+</td>
+
 </tr>
+
+
+
+
+
+<tr class="muydanina">
+
+<td>
+201 - 300
+</td>
+
+<td>
+Muy dañina a la salud
+</td>
+
+<td>
+Evitar esfuerzos físicos al aire libre.
+</td>
+
+</tr>
+
+
+
+
+
+<tr class="peligrosa">
+
+<td>
+300+
+</td>
+
+<td>
+Arriesgado
+</td>
+
+<td>
+Riesgo elevado para la salud.
+</td>
+
+</tr>
+
 
 
 </table>
 
 
-<div id="footer">
+
+<div class="footer">
+
 Fuente:
 <a href="https://aqicn.org" target="_blank">
-https://aqicn.org
+AQICN
 </a>
+
 </div>
+
 
 
 </body>
