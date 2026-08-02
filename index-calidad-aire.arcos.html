@@ -1,21 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Calidad del Aire Arcos</title>
+    <title>Widget de Calidad del Aire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        #city-aqi-container-display {
+            box-sizing: border-box;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: #009966;
+            color: white;
+        }
+
+        #footer {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+
 </head>
+
 
 <body>
 
-<h2 style="text-align:center">
-Índice de Calidad del Aire
-</h2>
 
-<div id="aqi-widget" style="text-align:center"></div>
+<div id="header">
+    Índice de Calidad del Aire
+</div>
 
-<script async 
-src="https://aqicn.org/jswgtx/?station=20260802-16&size=xxl&lang=es&container=aqi-widget">
-</script>
+
+<!-- Widget AQICN estación Arcos -->
+<div id="city-aqi-container-display">
+
+    <script async 
+    src="https://widgets.waqi.info/jswgt/?size=xxl&city=@8456&lang=es">
+    </script>
+
+    <noscript>
+        No se puede mostrar el widget.
+        (<a href="https://aqicn.org/">Más información</a>)
+    </noscript>
+
+</div>
+
+
+
+<table class="infoaqitable">
+
+<thead>
+<tr>
+    <th>ICA</th>
+    <th>Calidad del Aire</th>
+    <th>Proteja su Salud</th>
+</tr>
+</thead>
+
+
+<tr style="background-color:#009966;color:white">
+<td nowrap="true">0 - 50</td>
+<td>Buena</td>
+<td>No se anticipan impactos a la salud cuando la calidad del aire se encuentra en este intervalo.</td>
+</tr>
+
+
+<tr style="background-color:#ffde33">
+<td nowrap="true">51 -100</td>
+<td>Moderada</td>
+<td>Las personas extraordinariamente sensitivas deben considerar limitación de los esfuerzos físicos excesivos y prolongados al aire libre.</td>
+</tr>
+
+
+<tr style="background-color:#ff9933;color:white">
+<td nowrap="true">101-150</td>
+<td>Dañina a la Salud de los Grupos Sensitivos</td>
+<td>Los niños y adultos activos, y personas con enfermedades respiratorias deben evitar esfuerzos excesivos.</td>
+</tr>
+
+
+<tr style="background-color:#cc0033;color:white">
+<td nowrap="true">151-200</td>
+<td>Dañina a la Salud</td>
+<td>Reducir esfuerzos prolongados al aire libre.</td>
+</tr>
+
+
+<tr style="background-color:#660099;color:white">
+<td nowrap="true">201-300</td>
+<td>Muy Dañina a la Salud</td>
+<td>Evitar esfuerzos al aire libre.</td>
+</tr>
+
+
+<tr style="background-color:#7e0023;color:white">
+<td nowrap="true">300+</td>
+<td>Arriesgado</td>
+<td></td>
+</tr>
+
+
+</table>
+
+
+<div id="footer">
+Fuente:
+<a href="https://aqicn.org" target="_blank">
+https://aqicn.org
+</a>
+</div>
+
 
 </body>
 </html>
