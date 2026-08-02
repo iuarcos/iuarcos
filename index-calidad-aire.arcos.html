@@ -16,7 +16,7 @@
 
 body {
     margin: 0;
-    padding: 10px;
+    padding: 5px;
     font-family: Arial, sans-serif;
     background: #ffffff;
 }
@@ -31,11 +31,14 @@ h1 {
 
 /* Contenedor del widget */
 .widget-container {
-    width:100%;
-    max-width:100%;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    padding: 0;
+    margin: 0 auto;
 }
 
 
@@ -121,26 +124,14 @@ h1 {
 
 /* En móvil */
 
-@media(max-width:800px){
+@media (max-width: 600px) {
 
-h1 {
-    font-size:20px;
-}
-
-
-.infoaqitable {
-
-    font-size:12px;
-
-}
-
-
-.infoaqitable td,
-.infoaqitable th {
-
-    padding:6px;
-
-}
+    .widget-container {
+        transform: scale(0.85);
+        transform-origin: top center;
+        width: 118%;
+        margin-left: -9%;
+    }
 
 }
 
@@ -174,7 +165,7 @@ margin-top:20px;
 <div class="widget-container">
 
 
-<script type='text/javascript' src='https://widgets.waqi.info/jswgt/?size=large&city=@8456&lang=es'></script>
+<script type='text/javascript' src='https://widgets.waqi.info/jswgt/?size=xxl&city=@8456&lang=es'></script>
 
 <noscript>Not seeing a widget? (<a href='https://aqicn.org/'>More info</a>)</noscript>
 
