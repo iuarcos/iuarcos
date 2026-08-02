@@ -104,15 +104,19 @@ _aqiFeed({
 
     container:"city-aqi-container-display",
 
-    city:"H8456",
+    city:"@8456",
 
     lang:"es",
 
     callback:function(aqi){
 
-        console.log(aqi);
+        console.log("AQICN:", aqi);
 
-        $("#city-aqi-container-display").html(aqi.details);
+        $("#city-aqi-container-display").html(
+            "Índice AQI: " + aqi.aqi +
+            "<br>" +
+            "Actualización: " + aqi.time
+        );
 
     }
 
